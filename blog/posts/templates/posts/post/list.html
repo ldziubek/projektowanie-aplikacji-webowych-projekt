@@ -1,0 +1,14 @@
+{% extends "posts/base.html" %}
+
+{% block title %}Lista obiektów Post{% endblock %}
+
+{% block content %}
+Lista postów:
+{% for post in posts %}
+<p>Tytuł: {{ post.title }}</p>
+<p>Temat: {{ post.topic }}</p>
+<p>Autor: {{ post.created_by }}</p>
+<p>Data utworzenia: {{ post.created_at }}</p>
+<hr>
+{% endfor %}
+{% endblock %}
