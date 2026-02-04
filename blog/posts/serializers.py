@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from .models import Topic, Category, Post
+from .models import Category, Topic, Tag, Post, Page
+
+class CategoryModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+        read_only_fields = ['id']
 
 
 class TopicSerializer(serializers.Serializer):
@@ -25,15 +31,23 @@ class TopicSerializer(serializers.Serializer):
             )
         return value
 
-class CategoryModelSerializer(serializers.ModelSerializer):
+
+class TagModelSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = Tag
         fields = '__all__'
         read_only_fields = ['id']
+
 
 class PostModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        # fields = ['id', 'title', 'text', 'topic', 'slug', 'created_at', 'updated_at', 'created_by']
+        fields = '__all__'
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+
+class PageModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Page
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at']

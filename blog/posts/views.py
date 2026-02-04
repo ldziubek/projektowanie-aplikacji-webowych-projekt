@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 import datetime
-from .models import Topic, Category, Post
-# Create your views here.
-
+from .models import Category, Topic, Tag, Post, Page
 
 
 def welcome_view(request):
@@ -16,28 +14,7 @@ def welcome_view(request):
     return HttpResponse(html)
 
 
-def topic_list(request):
-    # pobieramy wszystkie obiekty Topic z bazy poprzez QuerySet
-    topics = Topic.objects.all()
-    return render(request,
-                  "posts/topic/list.html",
-                  {'topics': topics})
-
-
-def topic_detail(request, id):
-    # pobieramy konkretny obiekt Topic
-    try:
-        topic = Topic.objects.get(id=id)
-    except Topic.DoesNotExist:
-        raise Http404("Obiekt Topic o podanym id nie istnieje")
-
-    return render(request,
-                  "posts/topic/detail.html",
-                  {'topic': topic})
-
-
 def category_list(request):
-    # pobieramy wszystkie obiekty Category z bazy poprzez QuerySet
     categories = Category.objects.all()
 
     return render(request,
@@ -46,7 +23,6 @@ def category_list(request):
 
 
 def category_detail(request, id):
-    # pobieramy konkretny obiekt Category
     try:
         category = Category.objects.get(id=id)
     except Category.DoesNotExist:
@@ -57,8 +33,44 @@ def category_detail(request, id):
                   {'category': category})
 
 
+def topic_list(request):
+    topics = Topic.objects.all()
+    return render(request,
+                  "posts/topic/list.html",
+                  {'topics': topics})
+
+
+def topic_detail(request, id):
+    try:
+        topic = Topic.objects.get(id=id)
+    except Topic.DoesNotExist:
+        raise Http404("Obiekt Topic o podanym id nie istnieje")
+
+    return render(request,
+                  "posts/topic/detail.html",
+                  {'topic': topic})
+
+
+def tag_list(request):
+    tags = Tag.objects.all()
+
+    return render(request,
+                  "posts/tag/list.html",
+                  {'tags': tags})
+
+
+def tag_detail(request, id):
+    try:
+        tag = Tag.objects.get(id=id)
+    except Tag.DoesNotExist:
+        raise Http404("Obiekt Tag o podanym id nie istnieje")
+
+    return render(request,
+                  "posts/tag/detail.html",
+                  {'tag': tag})
+
+
 def post_list(request):
-    # pobieramy wszystkie obiekty Post z bazy poprzez QuerySet
     posts = Post.objects.all()
 
     return render(request,
@@ -67,7 +79,6 @@ def post_list(request):
 
 
 def post_list_by_topic(request):
-    # pobieramy wszystkie obiekty Post z bazy poprzez QuerySet
     posts = Post.objects.filter(topic=1)
 
     return render(request,
@@ -76,7 +87,6 @@ def post_list_by_topic(request):
 
 
 def post_detail(request, id):
-    # pobieramy konkretny obiekt Post
     try:
         post = Post.objects.get(id=id)
     except Post.DoesNotExist:
@@ -85,3 +95,22 @@ def post_detail(request, id):
     return render(request,
                   "posts/post/detail.html",
                   {'post': post})
+
+
+def page_list(request):
+    pages = Page.objects.all()
+
+    return render(request,
+                  "posts/page/list.html",
+                  {'pages': pages})
+
+
+def page_detail(request, id):
+    try:
+        page = Page.objects.get(id=id)
+    except Page.DoesNotExist:
+        raise Http404("Obiekt Page o podanym id nie istnieje")
+
+    return render(request,
+                  "posts/page/detail.html",
+                  {'page': page})
