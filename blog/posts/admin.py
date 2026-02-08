@@ -26,11 +26,11 @@ class TagAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    fields = ['title', 'text', 'topic', 'created_by', 'created_at', 'updated_at', 'slug']
+    fields = ['title', 'text', 'topic', 'tags', 'created_by', 'created_at', 'updated_at', 'slug']
     readonly_fields = ['created_by', 'created_at', 'updated_at']
     list_display = ['title', 'short_text', 'topic_category', 'created_by', 'created_at', 'updated_at']
     list_display_links = ['title', 'short_text']
-    list_filter = ['title', 'topic', 'topic__category', 'created_by', 'created_at']
+    list_filter = ['title', 'topic', 'topic__category', 'tags', 'created_by', 'created_at']
     prepopulated_fields = {"slug": ["title"]}
 
     @admin.display(description='Short text')

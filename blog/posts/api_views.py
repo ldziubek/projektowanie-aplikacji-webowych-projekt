@@ -406,3 +406,20 @@ def page_create(request):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Dodatkowe endpointy
+@api_view(['GET'])
+def tag_post_list(request, tag_name):
+    if request.method == 'GET':
+        posts = Post.objects.filter(tags__name__icontains=tag_name)
+        serializer = PostModelSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def topic_post_list(request, topic_name):
+    if request.method == 'GET':
+        posts = Post.objects.filter(topic__name__icontains=topic_name)
+        serializer = PostModelSerializer(posts, many=True)
+        return Response(serializer.data)

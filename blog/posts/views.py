@@ -78,14 +78,6 @@ def post_list(request):
                   {'posts': posts})
 
 
-def post_list_by_topic(request):
-    posts = Post.objects.filter(topic=1)
-
-    return render(request,
-                  "posts/post/list_by_topic.html",
-                  {'posts': posts})
-
-
 def post_detail(request, id):
     try:
         post = Post.objects.get(id=id)

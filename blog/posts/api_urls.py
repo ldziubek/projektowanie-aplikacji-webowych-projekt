@@ -22,6 +22,8 @@ urlpatterns = [
     path('tags/delete/<int:pk>/', api_views.tag_update_delete),
     path('tags/create/', api_views.tag_create),
     path('posts/', api_views.post_list),
+    path('posts/tag_posts/<str:tag_name>', api_views.tag_post_list),
+    path('posts/topic_posts/<str:topic_name>', api_views.topic_post_list),
     path('posts/<int:pk>/', api_views.post_detail),
     path('posts/search/<str:phrase>/', api_views.post_search_by_name),
     path('posts/update/<int:pk>/', api_views.post_update_delete),

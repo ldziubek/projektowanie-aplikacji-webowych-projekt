@@ -13,7 +13,6 @@ urlpatterns = [
     path("tags", views.tag_list),
     path("tags/<int:id>", views.tag_detail),
     path("posts", views.post_list),
-    path("posts_by_topic", views.post_list_by_topic),
     path("posts/<int:id>", views.post_detail),
     path("pages", views.page_list),
     path("pages/<int:id>", views.page_detail),
